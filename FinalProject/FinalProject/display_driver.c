@@ -62,7 +62,7 @@ void lcd_initialize()
 	write_reg(0x06,0);
 }
 
-void lcd_goto_xy(uint8_t col, uint8_t row)
+void lcd_goto_xy1(uint8_t col, uint8_t row)
 {
 	uint8_t num=0x80;
 	row = row%2;

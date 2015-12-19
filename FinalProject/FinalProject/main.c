@@ -3,6 +3,7 @@
  */
 
 #include "main.h"
+#include<pololu/3pi.h>
 
 int main()
 {
@@ -15,17 +16,19 @@ int main()
 	configure_push_button_array();
 	
 	playFrequency(500,1); //Code Uploaded
-	
+	sensortest();
+
 	lcd_puts("Final");
 	lcd_goto_xy(0,1);
 	lcd_puts("Project");
 	
-	uint32_t time;
-	char val[36];
+
 	
-	//sensortest();
+	
 	while(1){
-		//demo_sensors();
+		//time = get_discharge_time(1);
+		//print_hex(time);
+		//get_sensor_location();
 		/*
 		time = get_discharge_time(1);
 		lcd_goto_xy(0,0);

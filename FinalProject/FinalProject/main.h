@@ -12,23 +12,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "sensor.h"
-#include "buzzer.h"
-#include "motor_driver.h"
-#include "button_driver.h"
-#include "display_driver.h"
-
-
 #define CONCATENATE(type,letter) type##letter
 #define DDR(letter)  CONCATENATE(DDR,letter)
 #define PORT(letter) CONCATENATE(PORT,letter)
 #define PIN(letter)  CONCATENATE(PIN,letter)
 
 
-
-
-
-
+#include "sensor.h"
+#include "buzzer.h"
+#include "motor_driver.h"
+#include "button_driver.h"
+#include "display_driver.h"
 
 #endif 
 

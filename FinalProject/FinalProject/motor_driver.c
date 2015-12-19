@@ -26,11 +26,6 @@ static bool get_LB_PWM();
 static bool get_RA_PWM();
 static bool get_RB_PWM();
 
-void pidcoltrol()
-{
-	//uint32_t val = get_sensor_value(); 
-	
-}
 
 void configure_motors(){
 	

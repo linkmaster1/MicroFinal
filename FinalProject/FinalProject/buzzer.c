@@ -24,9 +24,6 @@ void playFrequency(uint32_t freq, uint8_t dur)
 		_delay_ms(500);
 	}
 	TIMER2_CLK &= ~(1<<0);
-	//OCR2A = (freq>>1);                        // set timer 2 pwm frequency
-	//OCR2B = freq; 
-
 }
 
 

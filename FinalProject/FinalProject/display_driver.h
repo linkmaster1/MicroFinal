@@ -22,7 +22,7 @@
 #define DB3_LOC 7
 
 void lcd_initialize();
-void lcd_goto_xy(uint8_t row, uint8_t col);
+void lcd_goto_xy1(uint8_t row, uint8_t col);
 void lcd_erase();
 void lcd_putc(const char x);
 void lcd_puts(const char *str);

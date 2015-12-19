@@ -6,6 +6,7 @@
 #include "main.h"
 
 #define SENSORS_PORT C
+// PIN PINC
 #define SENSORS_PIN 0x1F
 #define SENSORA (1<<0)
 #define SENSORB (1<<1)
@@ -23,4 +24,6 @@ void configure_reflectance_sensors();
 int8_t read_sensors();
 bool all_white();
 uint32_t get_discharge_time(uint8_t sensor);
+void sensortest();
+
 #endif
