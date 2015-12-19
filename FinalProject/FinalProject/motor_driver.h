@@ -31,6 +31,17 @@
 #define PWM_B_MASK 0x30
 
 
+//PWM
+
+void pid_controller();
+uint16_t bal(uint16_t pid_adj);
+
+
+
+
+//--
+
+
 void configure_motors();
 uint8_t duty_to_match(uint8_t duty);
 void set_left_motor_speed(uint8_t speed);

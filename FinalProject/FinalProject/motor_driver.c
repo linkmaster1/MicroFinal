@@ -26,6 +26,107 @@ static bool get_LB_PWM();
 static bool get_RA_PWM();
 static bool get_RB_PWM();
 
+void pid_controller()
+{
+	//_delay_us(1000);
+	float pwm= 50;
+
+
+	static float sensor = 0;
+	static float sensor_avg = 0;
+	static float error = 0;
+	static int8_t last_error = 0;
+	static float integral = 0;
+	static float deriv = 0;
+	static float control = 0;
+
+	float kp = .5;
+	float kd = 50;
+	float ki = .0001;
+
+	while(1)
+	{
+		
+		_delay_us(20);
+		if(get_sensor_location() == -128) continue;
+		else sensor = get_sensor_location()/100.9;
+		sensor_avg = sensor_avg + (sensor-sensor_avg)/32;
+		
+		error = 0 - sensor_avg;
+		deriv = error - last_error;
+		integral = integral + error;
+		control = kp*error + kd*deriv + ki*integral;
+		last_error = error;
+		
+	
+		float  pid_speed= control * pwm;
+		
+		int16_t pid_change_A =  pid_speed;
+		int16_t pid_change_B=  pid_speed;
+		
+		if (pid_change_A > 100)  pid_change_A = 155;
+		if (pid_change_B > 100)  pid_change_B = 155;
+		
+		if (pid_change_A < 0)  pid_change_A = 0;
+		if (pid_change_B < 0)  pid_change_B = 0;		
+		
+		
+		set_left_motor_speed(pid_change_A);
+		set_right_motor_speed(pid_change_B);
+	}
+}
+
+
+void pid_controller_fuckyou()
+{
+	//_delay_us(1000);
+	float pwm= 50;
+
+
+	static float sensor = 0;
+	static float sensor_avg = 0;
+	static float error = 0;
+	static int8_t last_error = 0;
+	static float integral = 0;
+	static float deriv = 0;
+	static float control = 0;
+
+	float kp = .5;
+	float kd = 50;
+	float ki = .0001;
+
+	while(1)
+	{
+		
+		_delay_us(20);
+		//if(get_sensor_location() == -128) continue;
+		//else sensor = get_sensor_location()/100.9;
+		sensor = get_sensor_location();
+		sensor_avg = sensor_avg + (sensor-sensor_avg)/32;
+		
+		error = 0 - sensor_avg;
+		deriv = error - last_error;
+		integral = integral + error;
+		control = kp*error + kd*deriv + ki*integral;
+		last_error = error;
+		
+		
+		float  pid_speed= control * pwm;
+		
+		int16_t pid_change_A =  pid_speed;
+		int16_t pid_change_B=  pid_speed;
+		
+		if (pid_change_A > 100)  pid_change_A = 155;
+		if (pid_change_B > 100)  pid_change_B = 155;
+		
+		if (pid_change_A < 0)  pid_change_A = 0;
+		if (pid_change_B < 0)  pid_change_B = 0;
+		
+		
+		set_left_motor_speed(pid_change_A);
+		set_right_motor_speed(pid_change_B);
+	}
+}
 
 void configure_motors(){
 	

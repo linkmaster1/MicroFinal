@@ -10,7 +10,7 @@ int8_t get_sensor_location()
 {
 	int8_t pos = 0;
 	uint8_t i = 0;
-	if(get_SENSORA())
+	if(get_SENSORA())// if 1 --> then over line 
 	{	
 		pos-=100;
 		i++;
@@ -93,6 +93,10 @@ bool get_SENSORE()
 	
 void irledon()
 {
+	//DDR(SENSORS_PORT) = (1<<5);
+	//PORT(SENSORS_PORT) = (1<<5);
+	//_delay_ms(10);
+	
 	DDR(SENSORS_PORT) = (1<<5);
 	PORT(SENSORS_PORT) = (1<<5);
 	_delay_ms(10);
@@ -101,7 +105,8 @@ void irledon()
 
 uint32_t get_discharge_time(uint8_t sensor)
 {
-	irledon();
+	//irledon();
+	configure_reflectance_sensors();
 	uint32_t thresh = 5000;
 	uint32_t time = 0;
 	

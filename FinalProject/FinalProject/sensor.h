@@ -25,5 +25,6 @@ int8_t read_sensors();
 bool all_white();
 uint32_t get_discharge_time(uint8_t sensor);
 void sensortest();
+int8_t get_sensor_location();
 
 #endif
