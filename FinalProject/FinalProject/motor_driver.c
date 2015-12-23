@@ -77,57 +77,77 @@ void pid_controller()
 }
 
 
-void pid_controller_fuckyou()
+void pid_controller_debuger()
 {
-	//_delay_us(1000);
-	float pwm= 50;
-
-
+//	lcd_puts("PIDFU");
+	float pwm= 15;
 	static float sensor = 0;
 	static float sensor_avg = 0;
 	static float error = 0;
-	static int8_t last_error = 0;
+	static float last_error = 0;
 	static float integral = 0;
 	static float deriv = 0;
 	static float control = 0;
-
+	
+	
 	float kp = .5;
-	float kd = 50;
-	float ki = .0001;
+	float kd = .015625;
+	float ki = .015625;
 
 	while(1)
 	{
-		
-		_delay_us(20);
-		//if(get_sensor_location() == -128) continue;
+		_delay_us(2);
+		if(get_sensor_location() == -128) continue;
 		//else sensor = get_sensor_location()/100.9;
-		sensor = get_sensor_location();
-		sensor_avg = sensor_avg + (sensor-sensor_avg)/32;
+		else{
+			
+				sensor =  get_sensor_location();
+				
+				print_hex(sensor);
+			sensor_avg = sensor_avg + ((sensor-sensor_avg)/32);
 		
-		error = 0 - sensor_avg;
-		deriv = error - last_error;
-		integral = integral + error;
-		control = kp*error + kd*deriv + ki*integral;
+			error = 0 - sensor_avg;
+			deriv = error - last_error;
+				integral = integral + error;		
+				last_error = error;
+
+			control = kp*error + kd*deriv + ki*integral;
+			//print_hex(control);
 		last_error = error;
 		
 		
-		float  pid_speed= control * pwm;
+		//print_hex(control);
+			
+		//print_hex(limit(pwm- control *pwm)) ;
+	
+//		print_hex(limit(pwm + control * pwm));
+			//set_left_motor_speed( limit(pwm- control *pwm)  );
+			//set_right_motor_speed( limit(pwm + control * pwm) );
 		
-		int16_t pid_change_A =  pid_speed;
-		int16_t pid_change_B=  pid_speed;
+		//set_left_motor_speed( limit(pwm- control *pwm)  );
+		//set_right_motor_speed( limit(pwm + control * pwm) );
 		
-		if (pid_change_A > 100)  pid_change_A = 155;
-		if (pid_change_B > 100)  pid_change_B = 155;
+		set_left_motor_speed( pwm- control *pwm  );
+		set_right_motor_speed( pwm + control * pwm );
+		_delay_ms(100);
 		
-		if (pid_change_A < 0)  pid_change_A = 0;
-		if (pid_change_B < 0)  pid_change_B = 0;
-		
-		
-		set_left_motor_speed(pid_change_A);
-		set_right_motor_speed(pid_change_B);
+		//	lcd_goto_xy(0,0);
+			//print_hex(limit(pwm- control *pwm));
+		//	lcd_goto_xy(0,1);
+			//print_hex(limit(pwm + control * pwm) );
+	
+		}
 	}
 }
 
+
+int16_t limit(int16_t val)
+{
+	if(val > 100) return 100;
+	else if(val < 0) return 0;
+	else return val;
+
+}
 void configure_motors(){
 	
 	 configure_left_motor();

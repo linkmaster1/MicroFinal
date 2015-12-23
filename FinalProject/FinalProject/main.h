@@ -23,6 +23,7 @@
 #include "motor_driver.h"
 #include "button_driver.h"
 #include "display_driver.h"
+#include <pololu/3pi.h>
 
 #endif 
 

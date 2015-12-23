@@ -39,9 +39,46 @@ int8_t get_sensor_location()
 		pos=-128;
 		i=1;
 	}
+	print(pos/i);
+	delay_ms(100);
 	return pos/i;
 }
 
+float get_sensor_location_debuger()
+{
+	float pos = 0;
+	float i = 0;
+	if(get_SENSORA())// if 1 --> then over line
+	{
+		pos-=1;
+		i++;
+	}
+	if(get_SENSORB())
+	{
+		pos-=.5;
+		i++;
+	}
+	if(get_SENSORC())
+	{	pos+=0;
+		i++;
+	}
+	if(get_SENSORD())
+	{
+		pos+=.5;
+		i++;
+	}
+	if(get_SENSORE())
+	{
+		pos+=1;
+		i++;
+	}
+	else if(all_white())
+	{
+		pos=-128;
+		i=1;
+	}
+	return pos/i;
+}
 void sensortest(){
 	
 	configure_left_motor();

@@ -3,7 +3,7 @@
  */
 
 #include "main.h"
-#include<pololu/3pi.h>
+
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
 	configure_push_button_array();
 	
 	playFrequency(500,1); //Code Uploaded
-	//sensortest();
+	sensortest();
 
 	lcd_goto_xy(0,0);
 	lcd_puts("Final");
@@ -25,13 +25,13 @@ int main()
 	
 
 	
-	
-	
-			shift_right_motor_forward();
+	//while(!button_pressed());
+	//lcd_erase();
+				shift_right_motor_forward();
 			shift_left_motor_forward();
-		
+		_delay_us(10);
 		 //pid_controller();
-		pid_controller_fuckyou();
+		//get_sensor_location_debuger();
 		
 		//pid_controller();
 		//time = get_discharge_time(1);
